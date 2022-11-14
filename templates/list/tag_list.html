@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Tag List
+      <a href="{% url 'list:tag-create' %}">
+        <button class="btn btn-success">
+          Add
+        </button>
+      </a>
+    </h1>
+
+    {% if tag_list %}
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+
+        {% for tag in tag_list %}
+            <tr>
+              <td>
+                  {{ tag.id }}
+              </td>
+              <td>
+                  {{ tag.name }}
+              </td>
+              <td>
+                <a href="{% url 'list:tag-update' pk=tag.id %}"><button class="btn btn-secondary">
+          Update
+        </button></a>
+              </td>
+              <td>
+                <a href="{% url 'list:tag-delete' pk=tag.id %}"><button class="btn btn-secondary">
+          Delete
+        </button></a>
+              </td>
+            </tr>
+        {% endfor %}
+      </table>
+
+    {% else %}
+        <p>There are no tags.</p>
+    {% endif %}
+{% endblock %}
